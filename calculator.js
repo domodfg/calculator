@@ -144,7 +144,6 @@ function decimal() {
 
 function deleteLastNumber() {
   let lastNumber = displayNum.charAt(displayNum.length - 1);
-  let firstNumber = displayNum.charAt(0);
   if (
     displayNum == "-" ||
     (lastNumber != "+" &&
