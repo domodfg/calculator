@@ -2,22 +2,26 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    gap: 20px;
     align-items: center;
+    justify-content: center;
     height: 600px;
 }
 
 .display {
     border: 1px black solid;
-    width: 200px;
+    width: 268px;
     height: 100px;
+    margin-left: 5px;
+    border-radius: 10px;
+    
 }
 
 .numbers {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 300px;
+    width: 275px;
     height: 200px;
     gap: 10px;
 }
@@ -33,7 +37,8 @@ button {
     width: 60px;
     padding: 0px;
     height: 60px;
-    text-align: center;
+    border-radius: 30px;
+    border: 0.5px black none;
 }
 
 .equal, .clear {
