@@ -69,6 +69,7 @@ function operate(operator, number1, number2) {
 function storeNumber() {
   number1 = parseFloat(displayNum);
   storeSecondNum = "";
+  secondDisplayer.textContent = storeSecondNum;
 }
 function pressEqual() {
   if (
@@ -86,7 +87,7 @@ function pressEqual() {
       displayNum = result.toFixed(2).replace(/[.,]00$/, "");
       storeSecondNum = result.toFixed(2).replace(/[.,]00$/, "");
     }
-    displayer.textContent = displayNum;
+    displayer.textContent = '';
     secondDisplayer.textContent = storeSecondNum;
     operator = "";
   }
@@ -145,7 +146,7 @@ function decimal() {
 function deleteLastNumber() {
   let lastNumber = displayNum.charAt(displayNum.length - 1);
   if (
-    displayNum == "-" ||
+    storeSecondNum == "-" ||
     (lastNumber != "+" &&
       lastNumber != "-" &&
       lastNumber != "*" &&
