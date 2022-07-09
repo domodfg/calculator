@@ -40,10 +40,12 @@ const secondDisplayer = document.querySelector(".displaySecondNum");
 
 digitButtons.forEach((digit) => {
   digit.addEventListener("click", () => {
-    displayNum += digit.textContent;
-    storeSecondNum += digit.textContent;
-    displayer.textContent = displayNum;
-    secondDisplayer.textContent = storeSecondNum;
+    if (displayNum != "undefined") {
+      displayNum += digit.textContent;
+      storeSecondNum += digit.textContent;
+      displayer.textContent = displayNum;
+      secondDisplayer.textContent = storeSecondNum;
+    }
   });
 });
 
@@ -64,15 +66,15 @@ function storeNumber() {
   storeSecondNum = "";
 }
 function pressEqual() {
-  if (storeSecondNum != "" && storeSecondNum != 'undefined') {
+  if (storeSecondNum != "" && storeSecondNum != "undefined") {
     number2 = parseFloat(storeSecondNum);
     operate(operator, number1, number2);
-    if (result == 'undefined') {
+    if (result == "undefined") {
       displayNum = result;
       storeSecondNum = result;
     } else {
-    displayNum = result.toFixed(2).replace(/[.,]00$/, "");
-    storeSecondNum = result.toFixed(2).replace(/[.,]00$/, "");
+      displayNum = result.toFixed(1).replace(/[.,]00$/, "");
+      storeSecondNum = result.toFixed(1).replace(/[.,]00$/, "");
     }
     displayer.textContent = displayNum;
     secondDisplayer.textContent = storeSecondNum;
@@ -80,7 +82,7 @@ function pressEqual() {
   }
 }
 function pressOperator(sign) {
-  if (storeSecondNum != "" && storeSecondNum != 'undefined') {
+  if (storeSecondNum != "" && storeSecondNum != "undefined") {
     pressEqual();
     storeNumber();
     displayNum += sign;
@@ -94,9 +96,20 @@ const minus = document.querySelector(".minus");
 const times = document.querySelector(".multiply");
 const over = document.querySelector(".divide");
 const equal = document.querySelector(".equal");
+const float = document.querySelector(".decimal");
 
-plus.addEventListener("click", () => pressOperator('+') );
-minus.addEventListener("click", () => pressOperator('-'));
-times.addEventListener("click", () => pressOperator('*'));
-over.addEventListener("click", () => pressOperator('/'));
+plus.addEventListener("click", () => pressOperator("+"));
+minus.addEventListener("click", () => pressOperator("-"));
+times.addEventListener("click", () => pressOperator("*"));
+over.addEventListener("click", () => pressOperator("/"));
 equal.addEventListener("click", pressEqual);
+
+function decimal() {
+  if (displayNum != "undefined" && !displayNum.includes(".")) {
+    displayNum += float.textContent;
+    storeSecondNum += float.textContent;
+    displayer.textContent = displayNum;
+    secondDisplayer.textContent = storeSecondNum;
+  }
+}
+float.addEventListener("click", decimal);
