@@ -31,8 +31,7 @@ digitButtons.forEach((digit) => {
       storeSecondNum = digit.textContent;
       displayer.textContent = displayNum;
       secondDisplayer.textContent = storeSecondNum;
-    }
-     else if (displayNum != "undefined" ) {
+    } else if (displayNum != "undefined") {
       displayNum += digit.textContent;
       storeSecondNum += digit.textContent;
       displayer.textContent = displayNum;
@@ -72,7 +71,12 @@ function storeNumber() {
   storeSecondNum = "";
 }
 function pressEqual() {
-  if (storeSecondNum != "" && storeSecondNum != "undefined") {
+  if (
+    storeSecondNum != "" &&
+    storeSecondNum != "undefined" &&
+    storeSecondNum != "-" &&
+    storeSecondNum != "."
+  ) {
     number2 = parseFloat(storeSecondNum);
     operate(operator, number1, number2);
     if (result == "undefined") {
@@ -88,7 +92,12 @@ function pressEqual() {
   }
 }
 function pressOperator(sign) {
-  if (storeSecondNum != "" && storeSecondNum != "undefined" && storeSecondNum != "-") {
+  if (
+    storeSecondNum != "" &&
+    storeSecondNum != "undefined" &&
+    storeSecondNum != "-" &&
+    storeSecondNum != "."
+  ) {
     pressEqual();
     storeNumber();
     displayNum += sign;
@@ -99,9 +108,9 @@ function pressOperator(sign) {
 
 function minusValue() {
   if (storeSecondNum != "undefined") {
-    displayNum += '-';
+    displayNum += "-";
     displayer.textContent = displayNum;
-    storeSecondNum += '-';
+    storeSecondNum += "-";
     secondDisplayer.textContent = storeSecondNum;
   }
 }
@@ -112,6 +121,7 @@ const times = document.querySelector(".multiply");
 const over = document.querySelector(".divide");
 const equal = document.querySelector(".equal");
 const float = document.querySelector(".decimal");
+const backSpace = document.querySelector(".backSpace");
 
 plus.addEventListener("click", () => pressOperator("+"));
 minus.addEventListener("click", () =>
@@ -120,6 +130,8 @@ minus.addEventListener("click", () =>
 times.addEventListener("click", () => pressOperator("*"));
 over.addEventListener("click", () => pressOperator("/"));
 equal.addEventListener("click", pressEqual);
+float.addEventListener("click", decimal);
+backSpace.addEventListener("click", deleteLastNumber);
 
 function decimal() {
   if (displayNum != "undefined" && !storeSecondNum.includes(".")) {
@@ -129,4 +141,21 @@ function decimal() {
     secondDisplayer.textContent = storeSecondNum;
   }
 }
-float.addEventListener("click", decimal);
+
+function deleteLastNumber() {
+  let lastNumber = displayNum.charAt(displayNum.length - 1);
+  let firstNumber = displayNum.charAt(0);
+  if (
+    displayNum == "-" ||
+    (lastNumber != "+" &&
+      lastNumber != "-" &&
+      lastNumber != "*" &&
+      lastNumber != "/" &&
+      lastNumber != "d")
+  ) {
+    displayNum = displayNum.slice(0, -1);
+    storeSecondNum = storeSecondNum.slice(0, -1);
+    secondDisplayer.textContent = storeSecondNum;
+    displayer.textContent = displayNum;
+  }
+}
